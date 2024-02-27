@@ -1,6 +1,7 @@
 This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
 
-About
+# About
+
 This app tests a potential solution for a sticky profile header using React animations.
 
 Limitations:
