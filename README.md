@@ -2,18 +2,7 @@ This is a new [**React Native**](https://reactnative.dev) project, bootstrapped 
 
 # About
 
-This app tests a potential solution for a sticky profile header using React animations.
-
-Limitations:
-
-- The profile header must have a fixed height.
-- Scrolling is allowed only in the tab section, not on the profile header.
-
-Known Issues:
-
-- On Android, scrolling starts to flicker when holding the scroll with finger.
-- On iOS, there is occasional flickering when the scroll reaches the bottom limit.
-- Switching between tabs does not scroll up. Scrolling programatically to the top will reveal the profile header.
+This app tests a potential solution for a sticky profile header using react-native-collapsible-tab-view and Reanimated.
 
 # Getting Started
 
