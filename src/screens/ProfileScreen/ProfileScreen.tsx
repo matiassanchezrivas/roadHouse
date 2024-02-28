@@ -1,47 +1,57 @@
 import React, {useRef} from 'react';
-import {SafeAreaView, ScrollView, Animated, StyleSheet} from 'react-native';
+import {Animated, SafeAreaView, StyleSheet} from 'react-native';
+import {Tabs} from 'react-native-collapsible-tab-view';
 
-import DynamicHeader from 'screens/ProfileScreen/components/DynamicHeader';
-import {colors} from '@theme/theme';
+import {colors, spacing} from '@theme/theme';
 
 import {NavigationBar} from './components/NavigationBar';
-import {useTabContext} from './context/TabContext';
-import Skeletons from './components/Skeletons';
+
+import RenderSkeletonItem from './components/SkeletonItem';
+import ProfileInfo from './components/ProfileInfo';
+
+export const ProfileTabList = [
+  {id: 1, title: 'Feed', color: '#BDEDE0'},
+  {id: 2, title: 'Favourite', color: '#BBDBD1'},
+  {id: 3, title: 'Events', color: '#B6B8D6'},
+];
 
 const ProfileScreen: React.FC = ({}) => {
   let scrollOffsetY = useRef(new Animated.Value(0)).current;
+  const skeletonData = Array.from({length: 5}, (_, index) => index.toString());
 
-  const {selectedTab} = useTabContext();
   return (
     <SafeAreaView style={styles.container}>
       <NavigationBar />
-      <DynamicHeader scrollValue={scrollOffsetY} />
-      <ScrollView
-        onScroll={Animated.event(
-          [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
-          {useNativeDriver: false},
-        )}
-        scrollEventThrottle={16}>
-        {selectedTab === 1 && <Skeletons quantity={10} color="#BDEDE0" />}
-        {selectedTab === 2 && <Skeletons quantity={20} color="#BBDBD1" />}
-        {selectedTab === 3 && <Skeletons quantity={6} color="#B6B8D6" />}
-      </ScrollView>
+      <Tabs.Container
+        renderHeader={() => <ProfileInfo scrollValue={scrollOffsetY} />}>
+        {ProfileTabList.map(tab => (
+          <Tabs.Tab key={tab.id} name={tab.title}>
+            <Tabs.FlatList
+              onScroll={Animated.event(
+                [{nativeEvent: {contentOffset: {y: scrollOffsetY}}}],
+                {useNativeDriver: false},
+              )}
+              style={styles.tabContainer}
+              data={skeletonData}
+              renderItem={() => <RenderSkeletonItem color={tab.color} />}
+              keyExtractor={item => item}
+            />
+          </Tabs.Tab>
+        ))}
+      </Tabs.Container>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  tabContainer: {
+    padding: spacing.m,
+  },
   container: {
     backgroundColor: colors.backgroundPri,
     flex: 1,
     margin: 0,
     paddingTop: 10,
-  },
-  scrollText: {
-    color: '#000',
-    fontSize: 19,
-    padding: 20,
-    textAlign: 'center',
   },
 });
 

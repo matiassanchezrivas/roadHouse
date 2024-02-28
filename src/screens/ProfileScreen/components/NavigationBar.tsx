@@ -24,6 +24,7 @@ const styles = StyleSheet.create({
     height: PROFILE_HEADER_MIN,
     justifyContent: 'space-between',
     padding: spacing.m,
+    zIndex: 2,
   },
   iconStyle: {
     color: colors.primary,

@@ -63,6 +63,7 @@ const ProfileInfo: React.FC<ProfileInfoProps> = ({scrollValue}) => {
 
 const styles = StyleSheet.create({
   container: {
+    pointerEvents: 'none',
     height: PROFILE_HEADER_MAX - PROFILE_HEADER_MIN,
     overflow: 'hidden',
     padding: spacing.s,

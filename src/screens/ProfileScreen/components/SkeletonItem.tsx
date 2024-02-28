@@ -1,31 +1,13 @@
 import React from 'react';
-import {FlatList, StyleSheet, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 
 import {colors, radius, spacing} from '@theme/theme';
 
-interface SkeletonsProps {
+interface SkeletonsItemProps {
   color: string;
-  quantity: number;
 }
 
-const Skeletons: React.FC<SkeletonsProps> = ({quantity, color}) => {
-  const skeletonData = Array.from({length: quantity}, (_, index) =>
-    index.toString(),
-  );
-
-  return (
-    <FlatList
-      data={skeletonData}
-      keyExtractor={item => item}
-      renderItem={() => <RenderSkeletonItem color={color} />}
-      scrollEnabled={false}
-      showsVerticalScrollIndicator={false}
-      style={styles.flatlistSyle}
-    />
-  );
-};
-
-const RenderSkeletonItem: React.FC<{color: string}> = ({color}) => (
+const RenderSkeletonItem: React.FC<SkeletonsItemProps> = ({color}) => (
   <View style={styles.skeletonItem}>
     <View style={[styles.skeletonHeader, {backgroundColor: color}]} />
     <View style={[styles.skeletonBody, {height: 10 + Math.random() * 300}]} />
@@ -34,9 +16,6 @@ const RenderSkeletonItem: React.FC<{color: string}> = ({color}) => (
 );
 
 const styles = StyleSheet.create({
-  flatlistSyle: {
-    marginVertical: spacing.m,
-  },
   skeletonBody: {
     backgroundColor: '#e0e0e0',
     borderRadius: radius.m,
@@ -63,9 +42,8 @@ const styles = StyleSheet.create({
     borderRadius: radius.m,
     borderWidth: 0.5,
     marginBottom: spacing.m,
-    marginHorizontal: spacing.m,
     padding: spacing.s,
   },
 });
 
-export default Skeletons;
+export default RenderSkeletonItem;
