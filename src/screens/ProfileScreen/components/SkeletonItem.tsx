@@ -10,7 +10,7 @@ interface SkeletonsItemProps {
 const RenderSkeletonItem: React.FC<SkeletonsItemProps> = ({color}) => (
   <View style={styles.skeletonItem}>
     <View style={[styles.skeletonHeader, {backgroundColor: color}]} />
-    <View style={[styles.skeletonBody, {height: 10 + Math.random() * 300}]} />
+    <View style={styles.skeletonBody} />
     <View style={styles.skeletonFooter} />
   </View>
 );
