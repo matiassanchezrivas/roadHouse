@@ -17,7 +17,6 @@ export const ProfileTabList = [
 
 const ProfileScreen: React.FC = ({}) => {
   let scrollOffsetY = useRef(new Animated.Value(0)).current;
-  const skeletonData = Array.from({length: 5}, (_, index) => index.toString());
 
   return (
     <SafeAreaView style={styles.container}>
@@ -32,7 +31,9 @@ const ProfileScreen: React.FC = ({}) => {
                 {useNativeDriver: false},
               )}
               style={styles.tabContainer}
-              data={skeletonData}
+              data={Array.from({length: tab.id * 3}, (_, index) =>
+                index.toString(),
+              )}
               renderItem={() => <RenderSkeletonItem color={tab.color} />}
               keyExtractor={item => item}
             />
