@@ -10,6 +10,7 @@ import {colors, spacing} from '@theme/theme';
 export const NavigationBar: React.FC = () => {
   return (
     <View style={styles.container}>
+      <View style={styles.overFlow} />
       <FontAwesomeIcon style={styles.iconStyle} icon={faArrowLeft} />
       <FontAwesomeIcon style={styles.iconStyle} icon={faBell} />
     </View>
@@ -28,5 +29,13 @@ const styles = StyleSheet.create({
   },
   iconStyle: {
     color: colors.primary,
+  },
+  overFlow: {
+    position: 'absolute',
+    backgroundColor: colors.backgroundPri,
+    top: -200,
+    left: 0,
+    right: 0,
+    height: 200,
   },
 });
